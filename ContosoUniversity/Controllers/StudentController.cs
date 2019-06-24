@@ -18,7 +18,7 @@ namespace ContosoUniversity.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            return View(db.Students.OrderByDescending(s => s.LastName).ToList());
         }
 
         // GET: Student/Details/5
