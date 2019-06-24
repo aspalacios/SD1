@@ -1,4 +1,4 @@
-﻿@model ContosoUniversity.Models.Student
+﻿@model ContosoUniversity.Models.ResultViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,32 +11,63 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model._studentDetail.LastName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model._studentDetail.LastName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model._studentDetail.FirstName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model._studentDetail.FirstName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @Html.DisplayNameFor(model => model._studentDetail.EnrollmentDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EnrollmentDate)
+            @Html.DisplayFor(model => model._studentDetail.EnrollmentDate)
         </dd>
-
     </dl>
+    <table>
+        <tr>
+            <td>
+                <b>Grade</b>
+            </td>
+        </tr>
+
+        @foreach (var enrollment in Model._enrollmentDetails)
+        {
+            <tr>
+                <td>
+                    @enrollment.Grade
+                </td>
+            </tr>
+        }
+    </table>
+    <table>
+        <tr>
+            <td>
+                <b>Courses</b>
+            </td>
+        </tr>
+
+        @foreach (var course in Model._courseDetails)
+        {
+            <tr>
+                <td>
+                    @course.Title
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model._studentDetail.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

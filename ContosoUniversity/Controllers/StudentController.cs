@@ -29,11 +29,19 @@ namespace ContosoUniversity.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Student student = db.Students.Find(id);
+            var enrollments = db.Enrollments.Where(e => e.StudentID == id).ToList();
+            List<Course> courses = new List<Course>();
+            foreach (var enrollment in enrollments)
+            {
+                var course = db.Courses.Where(c => c.CourseID == enrollment.CourseID).FirstOrDefault();
+                courses.Add(course);
+            }
+            var model = new ResultViewModel { _studentDetail = student, _enrollmentDetails = enrollments, _courseDetails = courses };
             if (student == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(model);
         }
 
         // GET: Student/Create
